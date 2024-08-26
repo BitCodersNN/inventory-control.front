@@ -1,8 +1,6 @@
 ﻿namespace inventory_control.front.ViewModels;
 
-public partial class MainWindowViewModel : ViewModelBase
+public class MainWindowViewModel : PageNavigationViewModelBase
 {
-#pragma warning disable CA1822 // Mark members as static
-    public string Greeting => "Welcome to Avalonia!";
-#pragma warning restore CA1822 // Mark members as static
+    public override PageViewModelBase DisplayedPage { get; protected set; }
 }
