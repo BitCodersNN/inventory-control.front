@@ -5,28 +5,28 @@ using CommunityToolkit.Mvvm.Input;
 
 namespace inventory_control.front.ViewModels;
 
-public abstract class PageStackViewModelBase : PageNavigationViewModelBase
+public abstract class PageStackViewModelBase : ViewModelBase, IPageNavigator
 {
     protected PageStackViewModelBase()
     {
         PopPageCommand = new RelayCommand(() => PopPage(), () => PageStack.Count > 1);
     }
+    
+    protected readonly Stack<ViewModelBase> PageStack = new Stack<ViewModelBase>();
 
-    protected readonly Stack<PageViewModelBase> PageStack = new Stack<PageViewModelBase>();
-
-    protected void PushPage(PageViewModelBase page)
+    protected void PushPage(ViewModelBase page)
     {
         PageStack.Push(page);
     }
 
-    protected PageViewModelBase PopPage()
+    protected ViewModelBase PopPage()
     {
         return PageStack.Pop();
     }
 
     public ICommand PopPageCommand { get; }
 
-    public override PageViewModelBase DisplayedPage
+    public ViewModelBase DisplayedPage
     {
         get => PageStack.Peek();
         protected set => throw new System.NotImplementedException();

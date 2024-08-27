@@ -6,12 +6,14 @@ using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using inventory_control.front.ViewModels;
 using inventory_control.front.Views;
+using LanguageExt;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace inventory_control.front;
 
 public partial class App : Application
 {
+    public static IServiceProvider Services;
     public override void Initialize()
     {
         
@@ -19,8 +21,7 @@ public partial class App : Application
         // initialize dependency injection
         var collection = new ServiceCollection();
         collection.AddApplicationServices();
-        IServiceProvider services = collection.BuildServiceProvider();
-        Resources[typeof(IServiceProvider)] = services;
+        Services = collection.BuildServiceProvider();
     }
 
     public override void OnFrameworkInitializationCompleted()
@@ -30,9 +31,9 @@ public partial class App : Application
             // Line below is needed to remove Avalonia data validation.
             // Without this line you will get duplicate validations from both Avalonia and CT
             BindingPlugins.DataValidators.RemoveAt(0);
-            desktop.MainWindow = new MainWindow
+            desktop.MainWindow = new MainWindowView
             {
-                DataContext = this.CreateInstance<MainWindowViewModel>(),
+                DataContext = Services.GetRequiredService<MainWindowViewModel>(),
             };
         }
 

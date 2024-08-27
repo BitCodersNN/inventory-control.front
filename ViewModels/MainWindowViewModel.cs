@@ -1,6 +1,20 @@
-﻿namespace inventory_control.front.ViewModels;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.Dynamic;
+using System.Net.Mime;
+using Avalonia;
+using inventory_control.front.Services.Interfaces;
+using inventory_control.front.ViewModels.Pages;
 
-public class MainWindowViewModel : PageNavigationViewModelBase
+namespace inventory_control.front.ViewModels;
+
+public class MainWindowViewModel : ViewModelBase, IPageNavigator
 {
-    public override PageViewModelBase DisplayedPage { get; protected set; }
+    private ViewModelBase _displayedPage;
+    public ViewModelBase DisplayedPage
+    {
+        get => _displayedPage;
+        private set => SetProperty(ref _displayedPage, value);
+    }
+    
 }
