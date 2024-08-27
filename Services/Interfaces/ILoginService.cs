@@ -23,5 +23,6 @@ public interface ILoginService : IApplicationService
     ///  - <c>IsSuccess = false</c> if any other error happened
     /// </returns>
     Task<Result<bool>> LoginAsync(string login, string password);
-    
+
+    void Logout();
 }

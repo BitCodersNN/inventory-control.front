@@ -27,8 +27,20 @@ public class LoginService : ObservableObject, ILoginService
     public async Task<Result<bool>> LoginAsync(string login, string password)
     {
         await Task.Delay(2000);
-        CurrentUser = new User("Admin", UserPermissions.Full, "", "");
-        IsLoggedIn = true;
-        return true;
+        CurrentUser = login switch
+        {
+            "1" => new User("Admin", UserPermissions.Full, "", ""),
+            "2" => new User("User A", UserPermissions.Read, "", ""),
+            "3" => new User("User B", UserPermissions.ReadWrite, "", ""),
+            _ => null
+        };
+        IsLoggedIn = CurrentUser != null;
+        return IsLoggedIn;
+    }
+
+    public void Logout()
+    {
+        IsLoggedIn = false;
+        CurrentUser = null;
     }
 }
