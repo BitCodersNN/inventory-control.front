@@ -7,13 +7,14 @@
              x:DataType="pages:LoginPageViewModel"
              x:Class="inventory_control.front.Views.Pages.LoginPageView">
     <StackPanel>
-        <TextBox Watermark="Логин"/>
-        <TextBox Watermark="Пароль" PasswordChar="*"/>
+        <TextBox Watermark="Логин" Text="{Binding LoginText}" />
+        <TextBox Watermark="Пароль" PasswordChar="*" Text="{Binding PasswordText}"/>
         <StackPanel Orientation="Horizontal">
             <Button Content="Войти" Command="{Binding LoginCommand}" IsEnabled="{Binding CanExecuteLogin}"/>
             <!-- Loading bar :D -->
             <!-- <Panel Background="Crimson" IsVisible="{Binding !CanExecuteLogin}" Width="50" Height="30"></Panel> -->
         </StackPanel>
-        <CheckBox>Запомнить пароль</CheckBox>
+        <CheckBox IsChecked="{Binding SavePassword}">Запомнить пароль</CheckBox>
+        <TextBlock Text="{Binding ErrorText}" IsVisible="{Binding ShowError}" />
     </StackPanel>
 </UserControl>
