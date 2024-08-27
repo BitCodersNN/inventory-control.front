@@ -14,5 +14,6 @@
             <!-- Loading bar :D -->
             <!-- <Panel Background="Crimson" IsVisible="{Binding !CanExecuteLogin}" Width="50" Height="30"></Panel> -->
         </StackPanel>
+        <CheckBox>Запомнить пароль</CheckBox>
     </StackPanel>
 </UserControl>
