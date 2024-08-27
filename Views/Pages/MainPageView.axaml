@@ -18,6 +18,9 @@
             </ListBox>
         </SplitView.Pane>
         <DockPanel>
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Top">
+                <Button Content="Выйти" Command="{Binding LogoutCommand}"></Button>
+            </StackPanel>
             <ContentControl Content="{Binding DisplayedPage}" />
         </DockPanel>
     </SplitView>

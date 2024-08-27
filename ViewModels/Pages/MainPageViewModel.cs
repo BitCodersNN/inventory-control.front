@@ -34,6 +34,8 @@ public class MainPageViewModel : ViewModelBase, IPageNavigator
         {
             Pages = PagesListFactory.GetPagesForUser(loginService.CurrentUser!);
         }
+
+        LogoutCommand = new RelayCommand(_loginService.Logout);
     }
 
     public List<ViewModelBase> Pages { get; } = [];
@@ -41,5 +43,6 @@ public class MainPageViewModel : ViewModelBase, IPageNavigator
     
 
     public ViewModelBase DisplayedPage => Pages[SelectedPageIndex];
-
+    
+    public ICommand LogoutCommand { get; }
 }
