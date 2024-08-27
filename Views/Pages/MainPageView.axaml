@@ -2,7 +2,23 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:pages="clr-namespace:inventory_control.front.ViewModels.Pages"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:DataType="pages:MainPageViewModel"
              x:Class="inventory_control.front.Views.Pages.MainPageView">
-    Welcome to Avalonia!
+    <SplitView
+        IsPaneOpen="True" DisplayMode="Inline" OpenPaneLength="240">
+        <SplitView.Pane>
+            <ListBox ItemsSource="{Binding Pages}" SelectedIndex="{Binding SelectedPageIndex}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Title}"></TextBlock>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </SplitView.Pane>
+        <DockPanel>
+            <ContentControl Content="{Binding DisplayedPage}" />
+        </DockPanel>
+    </SplitView>
 </UserControl>

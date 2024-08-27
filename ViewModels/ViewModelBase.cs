@@ -4,7 +4,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace inventory_control.front.ViewModels;
 
-public class ViewModelBase : ObservableObject
+public abstract class ViewModelBase : ObservableObject
 {
     protected static T GetService<T>() where T : notnull => App.Services.GetRequiredService<T>();
+
+    public virtual string Title { get; protected set; } = "";
 }

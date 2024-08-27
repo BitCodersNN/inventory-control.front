@@ -16,6 +16,11 @@ public static class ServiceCollectionExtensions
         services.AddTransient<LoginPageViewModel>();
         services.AddTransient<MainPageViewModel>();
         services.AddTransient<DataEntryPageViewModel>();
-
+        services.AddTransient<HistoryPage>();
+        services.AddTransient<OrdersPage>();
+        services.AddTransient<PrintingPage>();
+        services.AddTransient<WarehousePage>();
+        services.AddTransient<AnalyticsPage>();
+        services.AddTransient<AccountsPage>();
     }
 }

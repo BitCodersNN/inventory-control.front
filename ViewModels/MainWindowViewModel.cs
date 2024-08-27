@@ -18,14 +18,23 @@ public class MainWindowViewModel : ViewModelBase, IPageNavigator
     {
         _loginService = loginService;
         _displayedPage = GetDisplayedPage();
-        loginService.PropertyChanged += (sender, args) => DisplayedPage = GetDisplayedPage();
+        _loginService.PropertyChanged += (sender, args) =>
+        {
+            switch (args.PropertyName)
+            {
+                case nameof(ILoginService.IsLoggedIn):
+                    DisplayedPage = GetDisplayedPage();
+                    break;
+            }
+        };
     }
 
     private ViewModelBase GetDisplayedPage()
     {
         if (_loginService.IsLoggedIn)
         {
-            return GetService<MainPageViewModel>();
+            var mainPageViewModel = GetService<MainPageViewModel>();
+            return mainPageViewModel;
         }
 
         return GetService<LoginPageViewModel>();
@@ -35,5 +44,5 @@ public class MainWindowViewModel : ViewModelBase, IPageNavigator
         get => _displayedPage;
         private set => SetProperty(ref _displayedPage, value);
     }
-    
+
 }
