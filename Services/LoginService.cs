@@ -10,6 +10,7 @@ namespace inventory_control.front.Services;
 public class LoginService : ObservableObject, ILoginService
 {
     private bool _isLoggedIn;
+    private User? _currentUser;
 
     public bool IsLoggedIn
     {
@@ -17,7 +18,11 @@ public class LoginService : ObservableObject, ILoginService
         private set => SetProperty(ref _isLoggedIn, value);
     }
 
-    public User? CurrentUser { get; private set; }
+    public User? CurrentUser
+    {
+        get => _currentUser;
+        private set => SetProperty(ref _currentUser, value);
+    }
 
     public async Task<Result<bool>> LoginAsync(string login, string password)
     {
